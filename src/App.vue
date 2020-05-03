@@ -1,39 +1,28 @@
 <template>
-  <div id="app">
-    <div>
-      Data: {{ example }}
-    </div>
+    <div id="app">
+        <div>
+        </div>
 
-    <button @click="doTest">Test</button>
-  </div>
+    </div>
 </template>
 
 <script>
 
-import axios from 'axios'
+// import axios from 'axios'
 
 export default {
-  name: 'app',
+    name: 'app',
 
-  data() {
-    return {
-      example: ''
-    }
-  },
+    data() {
+        return {
+            username: "Anonymous",
+            mode: 0
+        }
+    },
 
-  methods: {
-    async doTest () {
-      try {
-        const res = await axios.post(
-          'http://localhost:8000/graphql', {
-          query: '{ links { url } }'
-        })
-        this.example = res.data.data.language
-      } catch (e) {
-        console.log('err', e)
-      }
-    }
-  },
+    methods: {
+        
+    },
 }
 
 </script>
