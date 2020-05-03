@@ -6,7 +6,7 @@
         </div>
 
         <div class="p-2 d-flex flex-column">
-            <Score :link="link" />
+            <Score :votes="link.votes" />
         </div>
 
         <div class="card-body">
