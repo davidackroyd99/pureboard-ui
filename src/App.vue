@@ -1,7 +1,6 @@
 <template>
     <div id="app">
-        <div>
-        </div>
+        <Nav></Nav>
 
     </div>
 </template>
@@ -9,6 +8,7 @@
 <script>
 
 // import axios from 'axios'
+import Nav from './components/Nav.vue'
 
 export default {
     name: 'app',
@@ -18,6 +18,10 @@ export default {
             username: "Anonymous",
             mode: 0
         }
+    },
+
+    components: {
+        Nav
     },
 
     methods: {
