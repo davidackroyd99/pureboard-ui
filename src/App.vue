@@ -34,14 +34,27 @@ export default {
     methods: {
         async getLinks(query) {
             const res = await axios.post('http://localhost:8000/graphql/', { query: query });
+            console.log(res.data.data.links);
             this.links = res.data.data.links;
-            console.log(this.links);
         }
     },
 
     mounted() {
         this.getLinks(`{
-            links {id url description}
+            links 
+            {
+                id url description
+                postedBy {
+                    username
+
+                    profile {
+                        karma
+                    }
+                }
+                votes {
+                    score
+                }
+            }
         }`);
     },
 }
