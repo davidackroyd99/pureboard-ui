@@ -1,6 +1,6 @@
 <template>
     <div>
-        {{ this.sumVotes(this.link.votes) }}
+        {{ this.sumVotes() }}
     </div>
 </template>
 
@@ -9,7 +9,7 @@
 export default {
     name: 'score-display',
 
-    props: ['link'],
+    props: ['votes'],
 
     data() {
         return {
@@ -17,11 +17,11 @@ export default {
     },
 
     methods: {
-        sumVotes: (votes) => {
+        sumVotes() {
             var sum = 0;
             
-            for(var i = 0; i < votes.length; i ++) {
-                sum += votes[i].score;
+            for(var i = 0; i < this.votes.length; i ++) {
+                sum += this.votes[i].score;
             }
 
             return sum

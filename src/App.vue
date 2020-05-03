@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <Nav />
+        <Nav :auth_level="this.auth_level" @token-received="setToken"/>
         
         <div class="links">
             <div class="link" v-for="link in links" :key="link.id">
@@ -21,8 +21,9 @@ export default {
 
     data() {
         return {
-            username: "Anonymous",
-            mode: 0,
+            user: undefined,
+            auth_level: 0,
+            token: '',
             links: [],
         }
     },
@@ -34,9 +35,13 @@ export default {
     methods: {
         async getLinks(query) {
             const res = await axios.post('http://localhost:8000/graphql/', { query: query });
-            console.log(res.data.data.links);
             this.links = res.data.data.links;
-        }
+        },
+
+        setToken(token) {
+            this.auth_level = 1;
+            this.token = token;
+        },
     },
 
     mounted() {
