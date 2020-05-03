@@ -1,28 +1,39 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div>
+      Data: {{ example }}
+    </div>
+
+    <button @click="doTest">Test</button>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import axios from 'axios'
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
+  name: 'app',
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  data() {
+    return {
+      example: ''
+    }
+  },
+
+  methods: {
+    async doTest () {
+      try {
+        const res = await axios.post(
+          'http://localhost:8000/graphql', {
+          query: '{ links { url } }'
+        })
+        this.example = res.data.data.language
+      } catch (e) {
+        console.log('err', e)
+      }
+    }
+  },
 }
-</style>
+
+</script>
