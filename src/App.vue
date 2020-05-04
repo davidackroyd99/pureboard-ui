@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <Nav :auth_level="this.auth_level" @token-received="setToken"/>
+        <Nav :auth_level="this.auth_level" @token-received="setToken" @logout="logout"/>
         
         <div class="links">
             <div class="link" v-for="link in links" :key="link.id">
@@ -39,12 +39,26 @@ export default {
         },
 
         setToken(token) {
+            localStorage.auth_level = 1;
+            localStorage.token = token;
+
             this.auth_level = 1;
             this.token = token;
+        },
+
+        logout() {
+            localStorage.auth_level = 0;
+            localStorage.token = '';
+
+            this.auth_level = 0;
+            this.token = '';
         },
     },
 
     mounted() {
+        this.token = localStorage.token;
+        this.auth_level = localStorage.auth_level;
+
         this.getLinks(`{
             links 
             {
