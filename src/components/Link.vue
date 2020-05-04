@@ -1,8 +1,8 @@
 <template>
     <div class="card d-flex flex-row">
         <div class="pl-2 pr-2 d-flex flex-column">
-            <a>▲</a>
-            <a>▼</a>
+            <a href="#">▲</a>
+            <a href="#">▼</a>
         </div>
 
         <div class="p-2 d-flex flex-column">
@@ -47,4 +47,8 @@ export default {
     .card-body {
         padding: 0px;
     }  
+
+    a :hover {
+        text-decoration: none;
+    }
 </style>

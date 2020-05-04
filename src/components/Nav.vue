@@ -24,7 +24,7 @@
         <a href="#" class="pl-2" @click="toggle_register" v-if="auth_level == 0">Register</a>
 
         <div v-if="auth_level != 0">
-            You are logged in.
+            You are logged in. <a href="#" @click="logout">Logout</a>
         </div>
 
     </nav>
@@ -59,11 +59,15 @@ export default {
                     token
                 } 
             }`;
-            const res = await axios.post('http://localhost:8000/graphql/', { query: mutation });
 
+            const res = await axios.post('http://localhost:8000/graphql/', { query: mutation });
             var token = res.data.data.tokenAuth.token;
 
             this.$emit('token-received', token);
+        },
+
+        logout() {
+            this.$emit('logout');
         }
     },
 }
