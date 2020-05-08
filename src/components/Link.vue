@@ -1,8 +1,8 @@
 <template>
     <div class="card d-flex flex-row">
         <div class="pl-2 pr-2 d-flex flex-column">
-            <a class="vote-arrow" href="#">▲</a>
-            <a class="vote-arrow" href="#">▼</a>
+            <VoteArrow @new_score="do_vote" :score=1 />
+            <VoteArrow @new_score="do_vote" :score=-1 />
         </div>
 
         <div class="p-2 d-flex flex-column">
@@ -18,22 +18,46 @@
 
 <script>
 
+import axios from 'axios'
+
 import Score from './Score';
 import UserSummary from './UserSummary';
+import VoteArrow from './VoteArrow';
 
 export default {
     name: 'link-display',
 
-    props: ['link'],
+    props: ['link', 'token', 'auth_level'],
 
     data() {
         return {
         }
     },
 
+    methods: {
+        async do_vote(score) {
+            var mutation = `
+            mutation { 
+                createVote(linkId: ${ this.link.id }, score: ${ score }) {
+                    link {
+                        url
+                    }
+                }
+            }`;
+
+            var headers = {
+                'Content-Type': 'application/json',
+                'Authorization': `JWT ${ this.token }`
+            };
+
+            await axios.post('http://localhost:8000/graphql/', { query: mutation }, { headers: headers });
+        }
+    },
+
     components: {
         Score,
-        UserSummary
+        UserSummary,
+        VoteArrow
     },
 }
 

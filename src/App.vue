@@ -4,7 +4,7 @@
         
         <div class="links">
             <div class="link" v-for="link in links" :key="link.id">
-                <Link :link="link" />
+                <Link :link="link" :token="token"/>
             </div>
         </div>
     </div>
@@ -59,7 +59,7 @@ export default {
         this.token = localStorage.token;
         this.auth_level = localStorage.auth_level;
 
-this.getLinks(`{
+        this.getLinks(`{
             links 
             {
                 id url description
