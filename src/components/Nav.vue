@@ -63,6 +63,7 @@ export default {
             const res = await axios.post('http://localhost:8000/graphql/', { query: mutation });
             var token = res.data.data.tokenAuth.token;
 
+            
             this.$emit('token-received', token);
         },
 
