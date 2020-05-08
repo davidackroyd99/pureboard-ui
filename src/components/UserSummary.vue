@@ -1,5 +1,5 @@
 <template>
-    <span>{{ this.user.username }} ({{ this.user.profile.karma }}) </span>
+    <span>{{ this.user.username }} ({{ this.user.karma }}) </span>
 </template>
 
 <script>

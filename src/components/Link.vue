@@ -1,8 +1,8 @@
 <template>
     <div class="card d-flex flex-row">
         <div class="pl-2 pr-2 d-flex flex-column">
-            <a href="#">▲</a>
-            <a href="#">▼</a>
+            <a class="vote-arrow" href="#">▲</a>
+            <a class="vote-arrow" href="#">▼</a>
         </div>
 
         <div class="p-2 d-flex flex-column">
@@ -48,7 +48,7 @@ export default {
         padding: 0px;
     }  
 
-    a :hover {
+    a:hover {
         text-decoration: none;
     }
 </style>

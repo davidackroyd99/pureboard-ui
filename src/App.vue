@@ -59,16 +59,13 @@ export default {
         this.token = localStorage.token;
         this.auth_level = localStorage.auth_level;
 
-        this.getLinks(`{
+this.getLinks(`{
             links 
             {
                 id url description
                 postedBy {
                     username
-
-                    profile {
-                        karma
-                    }
+                    karma
                 }
                 votes {
                     score
