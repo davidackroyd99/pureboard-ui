@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <Nav :auth_level="this.auth_level" @token-received="setToken" @logout="logout"/>
+        <Nav :auth_level="this.auth_level" :token="this.token" @token-received="setToken" @logout="logout"/>
         
         <div class="links">
             <div class="link" v-for="link in links" :key="link.id">
