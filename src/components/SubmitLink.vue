@@ -1,9 +1,11 @@
 <template>
 <div>
-    <b-button v-b-modal.submit-link-modal class="btn btn-outline-success my-2 my-sm-0 mr-5" type="submit">Submit Link</b-button>
+    <b-button v-b-modal.submit-link-modal variant="outline-primary" class="my-2 my-sm-0 mr-5" type="submit">Submit Link</b-button>
 
 
-    <b-modal id="submit-link-modal" ok-title="Submit" @ok="submitLink" title="Submit Link">
+    <b-modal id="submit-link-modal" 
+    ok-title="Submit" title="Submit Link" ok-class="btn btn-outline-success"
+    @ok="submitLink">
 
         <form class="form">
             <input class="form-control my-2" v-model="newUrl" type="text" placeholder="url" aria-label="url">
@@ -63,5 +65,11 @@ export default {
 </script>
 
 <style scoped>
+/* button {
+    color: rgb(40, 167, 69);
+    background-color: #fff;
+}
 
+button:focus {
+} */
 </style>

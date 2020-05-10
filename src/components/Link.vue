@@ -72,6 +72,11 @@ export default {
         padding: 0px;
     }  
 
+    .card {
+        border-radius: 0px;
+        border-top: none;
+    }
+
     a:hover {
         text-decoration: none;
     }
