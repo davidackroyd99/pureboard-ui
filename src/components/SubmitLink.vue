@@ -50,6 +50,8 @@ export default {
 
             this.newUrl = "";
             this.newDescription = "";
+
+            this.$emit('get-links');
         }
     },
 

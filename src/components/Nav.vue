@@ -8,7 +8,7 @@
             <a class="nav-item nav-link" href="#">Controversial</a>
         </ul>
 
-        <SubmitLink :token="this.token" />
+        <SubmitLink :token="this.token" @get-links="getLinks"/>
 
         <form v-if="auth_level == 0 && !register" class="form-inline">
             <input class="form-control mr-sm-2" v-model="username" type="text" placeholder="username" aria-label="username">
@@ -73,6 +73,22 @@ export default {
 
             
             this.$emit('token-received', token);
+        },
+
+        getLinks() {
+            this.$emit("get-links", `{
+                links 
+                {
+                    id url description
+                    postedBy {
+                        username
+                        karma
+                    }
+                    votes {
+                        score
+                    }
+                }
+            }`);
         },
 
         logout() {
