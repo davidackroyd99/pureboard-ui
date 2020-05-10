@@ -3,27 +3,28 @@
         <a class="navbar-brand" href="#">PureBoard</a>
 
         <ul class="navbar-collapse navbar-nav">
-            <a class="nav-item nav-link active" href="#">Hot</a>
+            <!-- <a class="nav-item nav-link active" href="#">Hot</a>
             <a class="nav-item nav-link" href="#">New</a>
-            <a class="nav-item nav-link" href="#">Controversial</a>
+            <a class="nav-item nav-link" href="#">Controversial</a> -->
         </ul>
 
-        <SubmitLink :token="this.token" @get-links="getLinks"/>
+        <SubmitLink v-if="auth_level != 0" :token="this.token" @get-links="getLinks"/>
 
         <form v-if="auth_level == 0 && !register" class="form-inline">
             <input class="form-control mr-sm-2" v-model="username" type="text" placeholder="username" aria-label="username">
             <input class="form-control mr-sm-2" v-model="password" type="password" placeholder="password" aria-label="password">
-            <button class="btn btn-outline-success my-2 my-sm-0" @click="login" type="submit">Login</button>
+            <b-button variant="outline-primary" class="my-2 my-sm-0 mr-5" @click="login" type="submit">Login</b-button>
         </form>
 
         <form v-if="auth_level == 0 && register" class="form-inline">
             <input class="form-control mr-sm-2" type="text" placeholder="email" aria-label="email">
             <input class="form-control mr-sm-2" type="text" placeholder="username" aria-label="username">
             <input class="form-control mr-sm-2" type="password" placeholder="password" aria-label="password">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Register</button>
+            <b-button variant="outline-primary" class="my-2 my-sm-0 mr-5" type="submit">Register</b-button>
         </form>
 
-        <a href="#" class="pl-2" @click="toggle_register" v-if="auth_level == 0">Register</a>
+        <a href="#" class="switch-anchor pl-2" @click="toggle_register" v-if="auth_level == 0 && !register">Register</a>
+        <a href="#" class="switch-anchor pl-2" @click="toggle_register" v-if="auth_level == 0 && register">Login</a>
 
         <div v-if="auth_level != 0">
             You are logged in. <a href="#" @click="logout">Logout</a>
@@ -98,3 +99,16 @@ export default {
 }
 
 </script>
+
+<style scoped>
+
+.switch-anchor {
+    width: 60px;
+    text-align: center;
+}
+
+button {
+    width: 108px;
+}
+
+</style>
