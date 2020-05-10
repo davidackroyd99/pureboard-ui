@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
         <a class="navbar-brand" href="#">PureBoard</a>
 
         <ul class="navbar-collapse navbar-nav">
@@ -7,6 +7,8 @@
             <a class="nav-item nav-link" href="#">New</a>
             <a class="nav-item nav-link" href="#">Controversial</a>
         </ul>
+
+        <SubmitLink :token="this.token" />
 
         <form v-if="auth_level == 0 && !register" class="form-inline">
             <input class="form-control mr-sm-2" v-model="username" type="text" placeholder="username" aria-label="username">
@@ -34,10 +36,16 @@
 
 import axios from 'axios'
 
+import SubmitLink from './SubmitLink';
+
 export default {
     name: 'navbar',
 
-    props: ['auth_level'],
+    props: ['auth_level', 'token'],
+
+    components: {
+        SubmitLink
+    },
 
     data() {
         return {
