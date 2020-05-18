@@ -17,10 +17,10 @@
         </form>
 
         <form v-if="auth_level == 0 && register" class="form-inline">
-            <input class="form-control mr-sm-2" type="text" placeholder="email" aria-label="email">
-            <input class="form-control mr-sm-2" type="text" placeholder="username" aria-label="username">
-            <input class="form-control mr-sm-2" type="password" placeholder="password" aria-label="password">
-            <b-button variant="outline-primary" class="my-2 my-sm-0 mr-5" type="submit">Register</b-button>
+            <input class="form-control mr-sm-2" v-model="email" type="text" placeholder="email" aria-label="email">
+            <input class="form-control mr-sm-2" v-model="username" type="text" placeholder="username" aria-label="username">
+            <input class="form-control mr-sm-2" v-model="password" type="password" placeholder="password" aria-label="password">
+            <b-button variant="outline-primary" class="my-2 my-sm-0 mr-5" @click="doRegister" type="submit">Register</b-button>
         </form>
 
         <a href="#" class="switch-anchor pl-2" @click="toggle_register" v-if="auth_level == 0 && !register">Register</a>
@@ -76,6 +76,22 @@ export default {
             this.$emit('token-received', token);
         },
 
+        async doRegister() {
+            var mutation = `mutation { 
+                createUser(username: "${ this.username }", password: "${ this.password }", email: "${ this.email }") {
+                    user {
+                        username
+                    }
+                } 
+            }`;
+
+            const res = await axios.post('http://localhost:8000/graphql/', { query: mutation });
+
+            if(res.status == 200) {
+                this.register = false;
+            }
+        },
+
         getLinks() {
             this.$emit("get-links", `{
                 links 
@@ -101,6 +117,10 @@ export default {
 </script>
 
 <style scoped>
+
+nav {
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
 
 .switch-anchor {
     width: 60px;
