@@ -5,6 +5,9 @@
 
     <b-modal id="submit-link-modal" 
     ok-title="Submit" title="Submit Link" ok-class="btn btn-outline-success"
+    header-class="bg-secondary text-white b-none"
+    footer-class="bg-secondary text-white b-none"
+    body-class="bg-dark"
     @ok="submitLink">
 
         <form class="form">
@@ -64,12 +67,10 @@ export default {
 
 </script>
 
-<style scoped>
-/* button {
-    color: rgb(40, 167, 69);
-    background-color: #fff;
+<style>
+
+.b-none {
+    border-style: none;
 }
 
-button:focus {
-} */
 </style>

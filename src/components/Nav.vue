@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <a class="navbar-brand" href="#">PureBoard</a>
 
         <ul class="navbar-collapse navbar-nav">
@@ -26,8 +26,8 @@
         <a href="#" class="switch-anchor pl-2" @click="toggle_register" v-if="auth_level == 0 && !register">Register</a>
         <a href="#" class="switch-anchor pl-2" @click="toggle_register" v-if="auth_level == 0 && register">Login</a>
 
-        <div v-if="auth_level != 0">
-            You are logged in. <a href="#" @click="logout">Logout</a>
+        <div v-if="auth_level != 0" >
+            <p>You are logged in.</p> <a href="#" @click="logout">Logout</a>
         </div>
 
     </nav>
@@ -117,9 +117,12 @@ export default {
 </script>
 
 <style scoped>
-
 nav {
-    border-bottom: 1px solid rgba(0,0,0,.125);
+    margin-bottom: 0.5rem;
+}
+
+.navbar-brand {
+    font-size: 28px;
 }
 
 .switch-anchor {
@@ -131,4 +134,8 @@ button {
     width: 108px;
 }
 
+p {
+    display: inline;
+    color: white;
+}
 </style>
