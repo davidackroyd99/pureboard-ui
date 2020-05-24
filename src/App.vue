@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="app" class="text-white">
         <Nav :auth_level="this.auth_level" @get-links="getLinks" :token="this.token" @token-received="setToken" @logout="logout"/>
         
         <div class="links">
@@ -76,3 +76,7 @@ export default {
 }
 
 </script>
+
+<style>
+
+</style>
