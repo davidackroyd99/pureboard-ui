@@ -44,8 +44,6 @@ export default {
                 }
             }`;
 
-            console.log(mutation);
-
             var headers = {
                 'Content-Type': 'application/json',
                 'Authorization': `JWT ${ this.token }`

@@ -24,7 +24,6 @@ export default {
             user: undefined,
             auth_level: 0,
             token: '',
-            user: undefined,
             links: [],
         }
     },
@@ -37,6 +36,29 @@ export default {
         async getLinks(query) {
             const res = await axios.post('http://localhost:8000/graphql/', { query: query });
             this.links = res.data.data.links;
+        },
+
+        async getUserInfo() {
+            var query = `
+            query { 
+                me {
+                    id
+                    username
+                    email
+                }
+            }`;
+
+            var headers = {
+                'Content-Type': 'application/json',
+                'Authorization': `JWT ${ this.token }`
+            };
+
+            const res = await axios.post('http://localhost:8000/graphql/', { query: query }, { headers: headers });
+            console.log(res);
+
+            if(res.status == 200) {
+                this.user = res.data.data.me;
+            }
         },
 
         setToken(token) {
@@ -60,6 +82,8 @@ export default {
         this.token = localStorage.token;
         this.auth_level = localStorage.auth_level;
 
+        this.getUserInfo();
+
         this.getLinks(`{
             links 
             {
@@ -75,6 +99,7 @@ export default {
                 }
             }
         }`);
+
     },
 }
 
