@@ -4,7 +4,7 @@
         
         <div class="links">
             <div class="link" v-for="link in links" :key="link.id">
-                <Link :link="link" :token="token"/>
+                <Link :link="link" :token="token" :user="user"/>
             </div>
         </div>
     </div>
@@ -24,6 +24,7 @@ export default {
             user: undefined,
             auth_level: 0,
             token: '',
+            user: undefined,
             links: [],
         }
     },
@@ -68,7 +69,9 @@ export default {
                     karma
                 }
                 votes {
-                    score
+                    user {
+                        id
+                    }
                 }
             }
         }`);

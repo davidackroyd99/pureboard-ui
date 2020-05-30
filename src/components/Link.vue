@@ -2,7 +2,7 @@
     <div class="background bg-secondary">
         <div class="card d-flex flex-row bg-dark">
             <div class="py-3 px-1 d-flex flex-column">
-                <VoteArrow @new_score="do_vote" :score=1 />
+                <VoteArrow v-if="show_arrow()" @new_score="do_vote" :score=1 />
             </div>
 
             <div class="py-3 px-1 d-flex flex-column">
@@ -28,7 +28,7 @@ import VoteArrow from './VoteArrow';
 export default {
     name: 'link-display',
 
-    props: ['link', 'token', 'auth_level'],
+    props: ['link', 'token', 'auth_level', 'user'],
 
     data() {
         return {
@@ -36,10 +36,10 @@ export default {
     },
 
     methods: {
-        async do_vote(score) {
+        async do_vote() {
             var mutation = `
             mutation { 
-                createVote(linkId: ${ this.link.id }, score: ${ score }) {
+                createVote(linkId: ${ this.link.id }) {
                     link {
                         url
                     }
@@ -52,13 +52,23 @@ export default {
             };
 
             await axios.post('http://localhost:8000/graphql/', { query: mutation }, { headers: headers });
+        },
+
+        show_arrow() {
+            for(var i = 0; i < this.link.votes.length; i++) {
+                if(this.link.votes[i].user.id == this.user.id) {
+                    return true;
+                }
+            }
+
+            return false;
         }
     },
 
     components: {
-        Score,
         UserSummary,
-        VoteArrow
+        VoteArrow,
+        Score
     },
 }
 
