@@ -1,12 +1,10 @@
 <template>
-    <a @click="fire_event" class="vote-arrow" :class="{hidden: !this.canVote}" href="#">{{ get_arrow() }}</a>
+    <a @click="fire_event" class="vote-arrow" :class="{hidden: !this.canVote}" href="#">{{ "▲" }}</a>
 </template>
 
 <script>
 
 export default {
-    props: ['score'],
-
     data() {
         return {
             canVote: true,
@@ -14,17 +12,8 @@ export default {
     },
 
     methods: {
-        get_arrow() {
-            if(this.score == 1) {
-                return "▲";
-            }
-            else {
-                return "▼";
-            }
-        },
-
         fire_event() {
-            this.$emit("new_score", this.score);
+            this.$emit("on_vote");
             this.canVote = false;
         }
     }

@@ -2,7 +2,7 @@
     <div class="background bg-secondary">
         <div class="card d-flex flex-row bg-dark">
             <div class="py-3 px-1 d-flex flex-column">
-                <VoteArrow v-if="show_arrow()" @new_score="do_vote" :score=1 />
+                <VoteArrow v-if="show_arrow()" @on_vote="do_vote" />
             </div>
 
             <div class="py-3 px-1 d-flex flex-column">
@@ -37,6 +37,8 @@ export default {
 
     methods: {
         async do_vote() {
+            console.log("do vote");
+
             var mutation = `
             mutation { 
                 createVote(linkId: ${ this.link.id }) {
@@ -57,11 +59,11 @@ export default {
         show_arrow() {
             for(var i = 0; i < this.link.votes.length; i++) {
                 if(this.link.votes[i].user.id == this.user.id) {
-                    return true;
+                    return false;
                 }
             }
 
-            return false;
+            return true;
         }
     },
 
